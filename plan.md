@@ -13,9 +13,10 @@ Ystävällisin terveisin,
 — Tiina Ojala
 
 -kurssit, vapaat ajat
-- tarjonnat, hinnat
-- ilmottautuminen
+- yleistä indexiin
+- tarjonnat, hinnat (linkki)
+- ilmottautuminen (linkki)
 
-about: kerrontaa yhtiöstä
-listing: kaikki kurssit ja hinnat
-contact: yhteystiedot
+about: kerrontaa yhtiöstä,  mitä tarjotaan, missä, kalusto
+listing: kaikki kurssit ja hinnat, aikataulut, ilmottautuminen
+contact: yhteystiedot, ilmottautuminen(linkki), asiakaspalvelu

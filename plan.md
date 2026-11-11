@@ -15,3 +15,7 @@ Ystävällisin terveisin,
 -kurssit, vapaat ajat
 - tarjonnat, hinnat
 - ilmottautuminen
+
+about: kerrontaa yhtiöstä
+listing: kaikki kurssit ja hinnat
+contact: yhteystiedot

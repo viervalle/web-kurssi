@@ -162,7 +162,7 @@ em { color: #b77b19; font-style: normal; }
 .road { position: absolute; left: 25%; width: 55%; height: 125%; bottom: -48%; transform: rotate(25deg); border-radius: 50% 50% 0 0; }
 .road-back { background: #9ba5a7; }
 .road-front { left: 38%; width: 24%; background: var(--navy); border-inline: 5px solid rgba(255,255,255,.7); }
-.art-label { position: absolute; left: 28px; top: 32px; display: grid; gap: 2px; color: var(--navy); font-size: .8rem; letter-spacing: .13em; }
+.art-label { position: absolute; left: 60px; top: 80px; display: grid; gap: 2px; color: var(--navy); font-size: .8rem; letter-spacing: .13em; }
 .art-stamp { position: absolute; right: 28px; bottom: 26px; width: 68px; height: 68px; display: grid; place-items: center; border: 2px solid var(--navy); border-radius: 50%; color: var(--navy); font-size: 2rem; font-weight: 900; }
 .art-stamp span { color: #b77b19; }
 

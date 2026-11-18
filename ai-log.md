@@ -6,3 +6,5 @@ Käytin Ai:ta myös päästääkseni alkuun sivun rakenteessa ja käytin avuksi 
 Ai antoi suoria vastauksia mutta pyrin kirjoittamaan kaikki itse ja oppimaan sekä ymmärtämään tekstin/koodin.
 
 CSS:n tekemiseen tarvitsin paljon apua Ai käyttämiseen. Ai antoi neuvot ja käytin niitä tuloksia css:n tekemiseen. CSS tuli tehtyä hyvin pitkälti AI avulla. Sen tekeminen vaikutti oudolle mutta kopioidessa ja kirjottaessa yritin huomata tapoja millä css voi tehdä.
+Korjasin useita kohtia missä teksti tai laatikko oli väärässä kohdassa.
+Ulkoasu on täysin Ai ehdottaman. Pientä korjailua väreihin myös.

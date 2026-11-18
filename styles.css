@@ -155,12 +155,12 @@ em { color: #b77b19; font-style: normal; }
   border-radius: 48% 48% 22px 22px;
   background: #e9d9b9;
 }
-.art-sun { position: absolute; top: 45px; right: 60px; width: 130px; aspect-ratio: 1; border-radius: 50%; background: var(--amber); }
-.road { position: absolute; left: 25%; width: 55%; height: 125%; bottom: -48%; transform: rotate(25deg); border-radius: 50% 50% 0 0; }
+.palkki { position: absolute; top: 45px; right: 40px; width: 600px; height: 30px; background: var(--amber); }
+.road { position: absolute; left: 25%; width: 55%; height: 129%; bottom: -48%; transform: rotate(180deg); }
 .road-back { background: #9ba5a7; }
 .road-front { left: 38%; width: 24%; background: var(--navy); border-inline: 5px solid rgba(255,255,255,.7); }
 .art-label { position: absolute; left: 60px; top: 80px; display: grid; gap: 2px; color: var(--navy); font-size: .8rem; letter-spacing: .13em; }
-.art-stamp { position: absolute; right: 28px; bottom: 26px; width: 68px; height: 68px; display: grid; place-items: center; border: 2px solid var(--navy); border-radius: 50%; color: var(--navy); font-size: 2rem; font-weight: 900; }
+.art-stamp { position: absolute; right: 28px; bottom: 24px; width: 68px; height: 68px; display: grid; place-items: center; border: 2px solid var(--navy); border-radius: 50%; color: var(--navy); font-size: 2rem; font-weight: 900; }
 .art-stamp span { color: #b77b19; }
 
 .license-section { padding-block: 76px 90px; }

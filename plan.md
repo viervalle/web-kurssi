@@ -10,6 +10,11 @@ Ystävällisin terveisin,
 
 — Tiina Ojala
 
+linkit nav sisään!
+värien nimitys oikein -> tausta, korostus
+indexissä linkit oikein
+<span> asiat oikein
+
 index: kurssit, vapaat ajat
        yleistä indexiin
         tarjonnat, hinnat (linkki)

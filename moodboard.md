@@ -10,7 +10,5 @@ Tunnelma:
   --line:   Teksti #f5efe0;
 
 
-
-
-
   Fontit: Otsikot, kuten muutkin tekstit pysyvät selkeinä. sans-sherif
+  Korostetut viestit ja ilmottautumiset boxin sisään.

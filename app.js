@@ -1,109 +1,82 @@
 
 document.addEventListener("DOMContentLoaded", () => {
-  const header = document.querySelector(".site-header");
 
-  // Rakennetaan sivuston navigaatio JavaScriptillä.
-  if (header) {
-    const menuButton = header.querySelector(".menu-toggle");
+  // YLÄVALIKKO
 
-    if (menuButton) {
-      // Luodaan oikeat hamburger-valikon palkit.
-      menuButton.type = "button";
-      menuButton.setAttribute("aria-label", "Avaa valikko");
+  const menuButton = document.querySelector(".menu-toggle");
+  const navigation = document.querySelector("#site-navigation");
+
+  if (menuButton && navigation) {
+
+    const closeMenu = () => {
       menuButton.setAttribute("aria-expanded", "false");
-      menuButton.setAttribute("aria-controls", "site-navigation");
-      menuButton.replaceChildren();
+      menuButton.setAttribute("aria-label", "Avaa valikko");
+      navigation.classList.remove("is-open");
+    };
 
-      for (let i = 0; i < 3; i += 1) {
-        const bar = document.createElement("span");
-        bar.className = "menu-toggle__bar";
-        bar.setAttribute("aria-hidden", "true");
-        menuButton.appendChild(bar);
+    menuButton.addEventListener("click", () => {
+      const isOpen =
+        menuButton.getAttribute("aria-expanded") === "true";
+
+      menuButton.setAttribute("aria-expanded", String(!isOpen));
+
+      menuButton.setAttribute(
+        "aria-label",
+        isOpen ? "Avaa valikko" : "Sulje valikko"
+      );
+
+      navigation.classList.toggle("is-open", !isOpen);
+    });
+
+    // Suljetaan valikko linkkiä painettaessa.
+    navigation.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        closeMenu();
+      });
+    });
+
+    // Suljetaan valikko Escape-näppäimellä.
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        closeMenu();
       }
+    });
 
-      let navigation = header.querySelector("#site-navigation");
-
-      if (!navigation) {
-        navigation = document.createElement("nav");
-        navigation.id = "site-navigation";
-        navigation.className = "site-nav";
-        navigation.setAttribute("aria-label", "Päävalikko");
-
-        const links = [
-          { href: "index.html", text: "Etusivu" },
-          { href: "listing.html", text: "Kurssit" },
-          { href: "about.html", text: "Ajokaistasta" },
-          { href: "contact.html", text: "Yhteystiedot" }
-        ];
-
-        links.forEach(({ href, text }) => {
-          const link = document.createElement("a");
-          link.href = href;
-          link.textContent = text;
-          navigation.appendChild(link);
-        });
-
-        header.appendChild(navigation);
+    // Suljetaan valikko, kun klikataan sen ulkopuolelle.
+    document.addEventListener("click", event => {
+      if (
+        !menuButton.contains(event.target) &&
+        !navigation.contains(event.target)
+      ) {
+        closeMenu();
       }
+    });
 
-      // Merkitään nykyinen sivu aktiiviseksi.
-      const currentPage =
-        window.location.pathname.split("/").pop() || "index.html";
+    // Merkitään nykyinen sivu aktiiviseksi.
+    const currentPage =
+      window.location.pathname.split("/").pop() || "index.html";
 
-      navigation.querySelectorAll("a").forEach((link) => {
-        const linkPage = link.getAttribute("href").split("#")[0];
+    navigation.querySelectorAll("a").forEach(link => {
+      const linkPage = link.getAttribute("href").split("#")[0];
 
-        if (linkPage === currentPage) {
-          link.setAttribute("aria-current", "page");
-        }
-      });
-
-      const closeMenu = () => {
-        menuButton.setAttribute("aria-expanded", "false");
-        menuButton.setAttribute("aria-label", "Avaa valikko");
-        navigation.classList.remove("is-open");
-      };
-
-      menuButton.addEventListener("click", () => {
-        const isOpen =
-          menuButton.getAttribute("aria-expanded") === "true";
-
-        menuButton.setAttribute("aria-expanded", String(!isOpen));
-        menuButton.setAttribute(
-          "aria-label",
-          isOpen ? "Avaa valikko" : "Sulje valikko"
-        );
-
-        navigation.classList.toggle("is-open", !isOpen);
-      });
-
-      navigation.addEventListener("click", (event) => {
-        if (event.target.closest("a")) {
-          closeMenu();
-        }
-      });
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-          closeMenu();
-        }
-      });
-
-      document.addEventListener("click", (event) => {
-        if (!header.contains(event.target)) {
-          closeMenu();
-        }
-      });
-    }
+      if (linkPage === currentPage) {
+        link.setAttribute("aria-current", "page");
+      }
+    });
   }
 
-  // Päivitetään alatunnisteen vuosiluku automaattisesti.
-  document.querySelectorAll("[data-year]").forEach((element) => {
+
+  // ALATUNNISTEEN VUOSILUKU
+
+  document.querySelectorAll("[data-year]").forEach(element => {
     element.textContent = new Date().getFullYear();
   });
 
-  // Navigaation tyylit ja mobiilivalikko.
+
+  // YLÄVALIKON TYYLIT
+
   if (!document.querySelector("#ajokaista-navigation-styles")) {
+
     const style = document.createElement("style");
 
     style.id = "ajokaista-navigation-styles";
@@ -138,6 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       @media (max-width: 760px) {
+
         .site-header {
           flex-wrap: wrap;
         }
@@ -167,4 +141,217 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.head.appendChild(style);
   }
+
+
+  // KURSSIEN HAKU JA SUODATUS
+
+  const search = document.querySelector("#kurssi-haku");
+  const filter = document.querySelector("#kurssi-suodatus");
+  const courseStatus = document.querySelector("#kurssi-tila");
+  const groups = [
+    ...document.querySelectorAll(".course-group")
+  ];
+
+  if (search && filter && courseStatus && groups.length) {
+
+    // Palautetaan aikaisempi hakusana.
+    try {
+      search.value =
+        localStorage.getItem("ajokaista-kurssihaku") || "";
+    } catch (error) {
+      search.value = "";
+    }
+
+    const updateCourses = () => {
+
+      const term = search.value
+        .trim()
+        .toLocaleLowerCase("fi");
+
+      const type = filter.value;
+
+      let shown = 0;
+
+      groups.forEach(group => {
+
+        const matchesText = group.textContent
+          .toLocaleLowerCase("fi")
+          .includes(term);
+
+        const matchesType =
+          type === "kaikki" ||
+          group.id === `${type}-kurssi`;
+
+        const visible = matchesText && matchesType;
+
+        group.hidden = !visible;
+
+        if (visible) {
+          shown++;
+        }
+      });
+
+      courseStatus.textContent = shown
+        ? `Näytetään ${shown} / ${groups.length} kurssia.`
+        : "Hakua vastaavia kursseja ei löytynyt.";
+
+      // Tallennetaan hakusana selaimeen.
+      localStorage.setItem("hakusana", "B-ajokortti")
+      
+      search.addEventListener("input", () => {
+        localStorage.setItem(
+          "ajokaista-kurssihaku",
+          search.value
+        );
+      } catch (error) {
+        // Sivusto toimii myös ilman localStoragea.
+      }
+      search.value = localStorage.getItem("ajokaista-kurssihaku") || "";
+    };
+
+    search.addEventListener("input", updateCourses);
+    filter.addEventListener("change", updateCourses);
+
+    updateCourses();
+  }
+
+
+  // LOMAKKEEN TARKISTUS
+
+  const form = document.querySelector("#lomake-form");
+  const status = document.querySelector("#lomake-tila");
+
+  if (form) {
+
+    // Käytetään omia virheilmoituksia.
+    form.noValidate = true;
+
+    // Luodaan jokaiselle kentälle virheilmoitus.
+    form.querySelectorAll("input, select, textarea")
+      .forEach((field, index) => {
+
+        const errorId = `kentta-virhe-${index}`;
+
+        const error = document.createElement("span");
+
+        error.className = "field-error";
+        error.id = errorId;
+        error.setAttribute("aria-live", "polite");
+
+        const container =
+          field.closest(".field") || field.parentElement;
+
+        if (container) {
+          container.appendChild(error);
+        }
+
+        field.dataset.errorId = errorId;
+      });
+
+
+    // Tarkistetaan lomake lähetyspainiketta painettaessa.
+    form.addEventListener("submit", event => {
+
+      event.preventDefault();
+
+      let firstInvalid = null;
+
+      form.querySelectorAll("input, select, textarea")
+        .forEach(field => {
+
+          const error = document.getElementById(
+            field.dataset.errorId
+          );
+
+          if (!error) {
+            return;
+          }
+
+          let message = "";
+
+          // Tarkistetaan pakolliset kentät.
+          if (field.required && !field.value.trim()) {
+
+            message = "Tämä tieto tarvitaan.";
+
+          } else if (
+            field.type === "email" &&
+            field.value &&
+            !field.validity.valid
+          ) {
+
+            message = "Tarkista sähköpostiosoite.";
+          }
+
+          error.textContent = message;
+
+          field.classList.toggle(
+            "invalid",
+            Boolean(message)
+          );
+
+          if (message) {
+
+            field.setAttribute("aria-invalid", "true");
+
+            const descriptions = (
+              field.getAttribute("aria-describedby") || ""
+            )
+              .split(/\s+/)
+              .filter(Boolean);
+
+            if (!descriptions.includes(field.dataset.errorId)) {
+              descriptions.push(field.dataset.errorId);
+            }
+
+            field.setAttribute(
+              "aria-describedby",
+              descriptions.join(" ")
+            );
+
+            if (!firstInvalid) {
+              firstInvalid = field;
+            }
+
+          } else {
+
+            field.removeAttribute("aria-invalid");
+
+            const descriptions = (
+              field.getAttribute("aria-describedby") || ""
+            )
+              .split(/\s+/)
+              .filter(id => id && id !== field.dataset.errorId);
+
+            if (descriptions.length) {
+              field.setAttribute(
+                "aria-describedby",
+                descriptions.join(" ")
+              );
+            } else {
+              field.removeAttribute("aria-describedby");
+            }
+          }
+        });
+
+
+      // Siirretään kohdistus ensimmäiseen virheelliseen kenttään.
+      if (firstInvalid) {
+
+        if (status) {
+          status.textContent = "Tarkista merkityt kentät.";
+        }
+
+        firstInvalid.focus();
+
+      } else {
+
+        if (status) {
+          status.textContent =
+            "Pyyntö on valmis tarkistettavaksi. Sivusto ei lähetä pyyntöä automaattisesti.";
+        }
+      }
+    });
+  }
+
 });

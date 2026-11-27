@@ -11,4 +11,4 @@ Ulkoasu on täysin Ai ehdottaman. Pientä korjailua väreihin myös.
 
 javascriptiin käytin ai apua, pyysin tiedostojeni perusteella hyvää javascriptiä. Lisäsin tiedoston ja lisäsin jokaiseen html tiedostoon tarvittavat rivit. Tarkastin scriptin ja kävin läpi missä tapahtuu mitäkin ja mikä vaikuttaa mihinkin.
 
-käytin ai:n apua kontrastin ja tumman tilan korjaamiseen. Kysyin hyviä vaihtoehtoja väreiksi ja laitoin ne css sisälle.
+käytin ai:n apua kontrastin ja tumman tilan korjaamiseen. Kysyin hyviä vaihtoehtoja väreiksi ja laitoin ne css sisälle. Värit vain lisäsin mitä oli valmiiksi.

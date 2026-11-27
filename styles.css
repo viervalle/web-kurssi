@@ -4,6 +4,7 @@
   --korostus: #f2b544;
   --tumma_teksti: #435a72;
   --teksti: #f5efe0;
+  --virhe: #18b902;
   --shadow: 0 18px 45px rgba(12, 27, 43, .10);
   --radius: 18px;
   --content: 1160px;
@@ -160,7 +161,7 @@ em { color: #b77b19; font-style: normal; }
 .road-front { left: 38%; width: 24%; background: var(--pääväri); border-inline: 5px solid rgba(255,255,255,.7); }
 .art-label { position: absolute; left: 60px; top: 80px; display: grid; gap: 2px; color: var(--pääväri); font-size: .8rem; letter-spacing: .13em; }
 .art-stamp { position: absolute; right: 28px; bottom: 24px; width: 68px; height: 68px; display: grid; place-items: center; border: 2px solid var(--pääväri); border-radius: 50%; color: var(--pääväri); font-size: 2rem; font-weight: 900; }
-.art-stamp span { color: #b77b19; }
+.art-stamp span { color: var(--korostus); }
 
 .license-section { padding-block: 76px 90px; }
 .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: 34px; }
@@ -475,3 +476,15 @@ em { color: #b77b19; font-style: normal; }
     border-color: var(--korostus);
   }
 }
+
+.course-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; margin: 24px auto; }
+.course-tools label { font-weight: 750; }
+.course-tools input, .course-tools select { min-height: 44px; padding: 9px 12px; border: 1px solid #687582; border-radius: 9px; font: inherit; background: #fff; color: #1e2b42; }
+#kurssi-tila, .course-help { grid-column: 1 / -1; margin: 0; }
+.course-help summary { cursor: pointer; font-weight: 750; text-decoration: underline; text-underline-offset: 3px; }
+.course-help p { margin: 8px 0 0; }
+.form-status { grid-column: 1 / -1; margin: 0; font-weight: 700; }
+#lomake-form .field-error { color: var(--virhe); font-size: .85rem; }
+#lomake-form .invalid { border: 2px solid var(--virhe); }
+:focus-visible { outline: 3px solid #f2b544; outline-offset: 3px; }
+@media (max-width: 600px) { .course-tools { grid-template-columns: 1fr; } }

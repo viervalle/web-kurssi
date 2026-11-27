@@ -29,6 +29,17 @@
     </header>
     <main> 
         <section class="page-hero"><p class="eyebrow">KURSSILISTAUS</p><h1>Alkavat <em>kurssit.</em></h1><p>Valitse ajokorttiluokka ja tutustu tuleviin kurssialoituksiin.</p> </section>
+        <section class="section-wrap course-tools" aria-label="Kurssien haku ja suodatus">
+            <label for="Kurssi-haku">Hae kurssia</label>
+            <input id="Kurssi-haku" type="search" placeholder="Esim. henkilöauto" autocomplete="off">
+            <label for="Kurssi-suodatus">Rajaa ajokorttiluokan mukaan</label>
+            <select id="Kurssi-suodatus">
+                <option value="Kaikki">Kaikki kurssit </option>
+                <option value="b">B - Henkilöauto</option>
+                <option value="a">A - Moottoripyörä</option>
+                <option value="t">T - Traktori</option>
+            </select>
+        </section>
         <section id="kurssit" class="section-wrap course-section">
          <div class="notice"><span class="notice-icon">i</span><p><strong>Huomio:</strong> Kurssit julkaistaan myöhemmin</p></div>
          <div class="course-group" id="b-kurssi"><div class="course-heading"><span class="license-code small-code">B</span><div><h2>Henkilöauto</h2><p>B-ajokortti</p></div></div><article class="course-row"><div><span class="course-date-label">ALKAMISPÄIVÄ</span><strong class="course-date">Päivämäärä ilmoitetaan</strong></div><div><span class="course-date-label">VAPAAT PAIKAT</span><strong class="seats">Vahvistetaan</strong></div><a class="button button-dark" href="registration.html?course=B">Ilmoittaudu →</a></article></div>
@@ -45,7 +56,23 @@
             <div class="field"><label for="kurssi">Kurssi</label><select id="kurssi" name="kurssi"><option value="">Valitse kurssi</option><option value="B">B-ajokortti (henkilöauto)</option><option value="A">A-ajokortti (moottoripyörä)</option><option value="T">T-ajokortti (traktori)</option></select></div>
             <div class="field"><label for="Opetus kieli">Opetus kieli</label><select id="Opetus kieli" name="Opetus kieli"><option value="">Valitse kieli</option><option value="fi">Suomi</option><option value="sv">Ruotsi</option><option value="en">Englanti</option></select></div>
             <div class="field"><label for="Huoltajan tiedot alle 18-vuotiaalle">Huoltajan tiedot alle 18-vuotiaalle</label><input type="text" id="Huoltajan tiedot alle 18-vuotiaalle" name="Huoltajan tiedot alle 18-vuotiaalle"></div>
-            <div class="field"><label for="viesti">Viesti</label><textarea id="viesti" name="viesti"></textarea></div><button type="submit" class="button button-dark">Lähetä ilmottautuminen →</button></form></section> 
+            <div class="field"><label for="viesti">Viesti</label><textarea id="viesti" name="viesti"></textarea></div>
+            <section class="form-step">
+                <h3>Tarkista tietosi</h3>
+                <p class="review-intro">
+                    Varmista että tiedot ovat oikein. Voit palata muokkaamaan niitä ennen lähettämistä.
+                </p>
+                <div id=""review-content" class="review-content"></div>
+                <label class="check-row consent-row">
+                    <span>Olen lukenut tietosuojatiedot ja hyväksyn, että tietojani käytetään vain tämän ilmottautumispyynnön käsittelyyn.</span>
+                    <input type="checkbox" id="privacy-consent" required>
+                </label>
+                <small id="consent-error" class="field-error"></small>
+            </section>
+            <button type="submit" class="button button-dark">Lähetä ilmottautuminen →</button></form>
+        </section>
+            
+
     </main>
     <footer class="site-footer"><a class="brand brand-footer" href="index.html"><span class="brand-mark">A</span><span>AJOKAISTA<small>AUTOKOULU · ALAJÄRVI</small></span></a><p>Oma kaista. Oma suunta. Ei väistetä.</p><div class="footer-links"><a href="listing.html">Kurssit</a><a href="about.html">Ajokaistasta</a><a href="contact.html">Yhteystiedot</a></div><small>© <span data-year=""></span> Autokoulu Ajokaista</small></footer>
 </body>
